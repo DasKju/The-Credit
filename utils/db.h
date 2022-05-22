@@ -3,10 +3,7 @@
  #include <string>
  #include <stdlib.h>
  #include <stdio.h>
- #include <cstdlib>
- #include <fstream>
- #include <dirent.h>
- #include <sys/stat.h>
+
  using namespace std;
 int initialize(){
   sqlite3* pDb = NULL;
