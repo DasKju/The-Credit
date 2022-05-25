@@ -45,7 +45,10 @@ do {
      sqlite3_free(err_message);
    } if(ret == SQLITE_OK){
       fprintf(stdout, "Operation done successfully\n");
+      sqlite3_close(pDb);
+      sqlite3_shutdown();
     }
 } while(false);
-
+sqlite3_close(pDb);
+sqlite3_shutdown();
 }

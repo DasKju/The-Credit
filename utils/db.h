@@ -28,13 +28,7 @@ int initialize(){
          {
              cout << "Connecten Sucessfully to db \n";
          }
-        if (SQLITE_ROW != (ret = sqlite3_step(query)))
-        {
-            cout << "Failed to step: " << ret << " " << sqlite3_errmsg(pDb);
-            break;
-        }
 
-        cout << "Value from sqlite: " << sqlite3_column_text(query, 0)<<"\n";
 
   } while(false);
   do {
@@ -49,7 +43,7 @@ int initialize(){
       if (rc != SQLITE_OK) {
         std::cout << "Error Massage: " << err_message << '\n';
       }
-      else{
+      if(rc==SQLITE_OK){
         std::cout << "Table TheCredit created successfully" << '\n';
         const char *sql_ = "INSERT INTO TheCredit (ID, Company, Name, CEO,PE, Amount, Value) VALUES (1, 'dasKju', 'Kju', 'Benn1x',12, 1200, 2000)";
         rc = sqlite3_exec(pDb, sql_, 0, 0, &err_message);
@@ -62,6 +56,7 @@ int initialize(){
     }while(false);
     if (NULL != query) sqlite3_finalize(query);
     if (NULL != pDb) sqlite3_close(pDb);
+    sqlite3_close(pDb);
     sqlite3_shutdown();
     return ret;
 }
