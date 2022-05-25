@@ -21,7 +21,6 @@ void get(){
   sqlite3* pDb = NULL;
   sqlite3_stmt* query = NULL;
   char *err_message = 0;
-  void *data;
   int ret = 0;
 do {
   if (SQLITE_OK != (ret = sqlite3_initialize()))
@@ -38,8 +37,10 @@ do {
        {
            cout << "Connecten Sucessfully to db \n";
        }
+       cout << "Starting Request" << "\n";
      const char* sql = "SELECT * FROM TheCredit ";
-     ret = sqlite3_exec(pDb, sql, callback, (void*)data, &err_message);
+     ret = sqlite3_exec(pDb, sql, callback, 0, &err_message);
+     cout << "Requested" << "\n";
     if (ret != SQLITE_OK) {
       fprintf(stderr, "SQL error: %s\n", err_message);
      sqlite3_free(err_message);
