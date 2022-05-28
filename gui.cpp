@@ -1,6 +1,7 @@
 
 #include <wx/wx.h>
 #include <wx/menu.h>
+#include <wx/textctrl.h>
 
 class MyApp : public wxApp
 {
@@ -38,17 +39,24 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
   menubar->Append(help, wxT("&Help"));
   SetMenuBar(menubar);
 
+  wxTextCtrl    *test = new wxTextCtrl( this, wxID_ANY, "This is the log window.\n",
+                            wxPoint(5,260), wxSize(630,100),
+                            wxTE_MULTILINE | wxTE_READONLY);
+    test -> SetBackgroundColour(wxColor(33, 33, 91));
+    wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, "Only upper case",
+                                           wxDefaultPosition, wxDefaultSize);
+                                           upperOnly->ForceUpper();
+
     wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
     panel_top->SetBackgroundColour(wxColor(33, 33, 31));
-    wxPanel *panel_bottom = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
-    panel_bottom->SetBackgroundColour(wxColor(100, 200, 100));
+
 
 
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(panel_top, 2.5, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 10);
-    sizer->Add(panel_bottom,1,wxEXPAND| wxLEFT| wxTOP| wxRIGHT, 10);
-
+    sizer -> Add(test, 1, wxALL | wxEXPAND, 10 );
+    sizer -> Add( upperOnly, 0, wxALL, 10 );
      wxSizer *sizer_bottom = new wxBoxSizer(wxVERTICAL);
          this->SetSizerAndFit(sizer);
 }
