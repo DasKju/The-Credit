@@ -43,9 +43,8 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
                             wxPoint(5,260), wxSize(630,100),
                             wxTE_MULTILINE | wxTE_READONLY);
     test -> SetBackgroundColour(wxColor(33, 33, 91));
-    wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, "Only upper case",
-                                           wxDefaultPosition, wxDefaultSize);
-                                           upperOnly->ForceUpper();
+    wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, "Text input",
+                                           wxPoint(5,260), wxSize(630,30));
 
     wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
     panel_top->SetBackgroundColour(wxColor(33, 33, 31));
@@ -56,7 +55,7 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(panel_top, 2.5, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 10);
     sizer -> Add(test, 1, wxALL | wxEXPAND, 10 );
-    sizer -> Add( upperOnly, 0, wxALL, 10 );
+    sizer -> Add( upperOnly, 0.25, wxALL, 10 );
      wxSizer *sizer_bottom = new wxBoxSizer(wxVERTICAL);
          this->SetSizerAndFit(sizer);
 }
