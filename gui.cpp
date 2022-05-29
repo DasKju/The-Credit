@@ -54,18 +54,15 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
                                            wxPoint(5,260), wxSize(630,30),wxTE_PROCESS_ENTER);
     upperOnly->Bind(wxEVT_TEXT_ENTER, [test, upperOnly](wxCommandEvent&) {
       *test << "i work, Value: "<< upperOnly -> GetValue() << "\n";
-
+      upperOnly ->SetValue("");
      });
-    wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
-    panel_top->SetBackgroundColour(wxColor(33, 33, 31));
 
 
 
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-    sizer->Add(panel_top, 2.5, wxEXPAND | wxLEFT | wxTOP | wxRIGHT, 10);
     sizer -> Add(test, 1, wxALL | wxEXPAND, 10 );
-    sizer -> Add( upperOnly, 0.25, wxALL, 10 );
+    sizer -> Add( upperOnly, 0.25, wxALL | wxEXPAND, 10 );
      wxSizer *sizer_bottom = new wxBoxSizer(wxVERTICAL);
          this->SetSizerAndFit(sizer);
 
