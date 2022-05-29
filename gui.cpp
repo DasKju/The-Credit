@@ -2,6 +2,12 @@
 #include <wx/wx.h>
 #include <wx/menu.h>
 #include <wx/textctrl.h>
+#include <wx/event.h>
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <stdio.h>
+#include "Logo.xpm"
 
 class MyApp : public wxApp
 {
@@ -24,8 +30,10 @@ bool MyApp::OnInit()
     return true;
 }
 
+
 MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) : wxFrame(nullptr, wxID_ANY, title, pos, size)
 {
+  SetIcon(wxICON(logo));
   wxMenuBar *menubar;
        wxMenu *file;
        wxMenu *help;
@@ -38,14 +46,16 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
   menubar->Append(file, wxT("&Options"));
   menubar->Append(help, wxT("&Help"));
   SetMenuBar(menubar);
-
   wxTextCtrl    *test = new wxTextCtrl( this, wxID_ANY, "This is the log window.\n",
                             wxPoint(5,260), wxSize(630,100),
                             wxTE_MULTILINE | wxTE_READONLY);
     test -> SetBackgroundColour(wxColor(33, 33, 91));
-    wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, "Text input",
-                                           wxPoint(5,260), wxSize(630,30));
+    wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, wxT("Test"),
+                                           wxPoint(5,260), wxSize(630,30),wxTE_PROCESS_ENTER);
+    upperOnly->Bind(wxEVT_TEXT_ENTER, [test, upperOnly](wxCommandEvent&) {
+      *test << "i work, Value: "<< upperOnly -> GetValue() << "\n";
 
+     });
     wxPanel *panel_top = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(200, 100));
     panel_top->SetBackgroundColour(wxColor(33, 33, 31));
 
@@ -58,4 +68,5 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
     sizer -> Add( upperOnly, 0.25, wxALL, 10 );
      wxSizer *sizer_bottom = new wxBoxSizer(wxVERTICAL);
          this->SetSizerAndFit(sizer);
+
 }
