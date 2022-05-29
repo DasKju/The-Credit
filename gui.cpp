@@ -47,13 +47,13 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
   menubar->Append(help, wxT("&Help"));
   SetMenuBar(menubar);
   wxTextCtrl    *test = new wxTextCtrl( this, wxID_ANY, "This is the log window.\n",
-                            wxPoint(5,260), wxSize(630,100),
+                            wxPoint(5,260), wxSize(1030,400),
                             wxTE_MULTILINE | wxTE_READONLY);
     test -> SetBackgroundColour(wxColor(33, 33, 91));
-    wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, wxT("Test"),
-                                           wxPoint(5,260), wxSize(630,30),wxTE_PROCESS_ENTER);
+    wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, wxT(""),
+                                           wxPoint(5,260), wxSize(1030,30),wxTE_PROCESS_ENTER);
     upperOnly->Bind(wxEVT_TEXT_ENTER, [test, upperOnly](wxCommandEvent&) {
-      *test << "i work, Value: "<< upperOnly -> GetValue() << "\n";
+      *test << "Value: "<< upperOnly -> GetValue() << "\n";
       upperOnly ->SetValue("");
      });
 
