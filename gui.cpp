@@ -7,7 +7,9 @@
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
+#include "utils/command.h"
 #include "Logo.xpm"
+#include "utils/db-init.h"
 
 class MyApp : public wxApp
 {
@@ -33,6 +35,7 @@ bool MyApp::OnInit()
 
 MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) : wxFrame(nullptr, wxID_ANY, title, pos, size)
 {
+  dbinit();
   SetIcon(wxICON(logo));
   wxMenuBar *menubar;
        wxMenu *file;
@@ -46,14 +49,14 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
   menubar->Append(file, wxT("&Options"));
   menubar->Append(help, wxT("&Help"));
   SetMenuBar(menubar);
-  wxTextCtrl    *test = new wxTextCtrl( this, wxID_ANY, "This is the log window.\n",
+  wxTextCtrl    *test = new wxTextCtrl( this, wxID_ANY, "",
                             wxPoint(5,260), wxSize(1030,400),
                             wxTE_MULTILINE | wxTE_READONLY);
-    test -> SetBackgroundColour(wxColor(33, 33, 91));
     wxTextCtrl* upperOnly = new wxTextCtrl(this, wxID_ANY, wxT(""),
                                            wxPoint(5,260), wxSize(1030,30),wxTE_PROCESS_ENTER);
     upperOnly->Bind(wxEVT_TEXT_ENTER, [test, upperOnly](wxCommandEvent&) {
-      *test << "Value: "<< upperOnly -> GetValue() << "\n";
+      wxString input = upperOnly -> GetValue();
+      *test << command(input);
       upperOnly ->SetValue("");
      });
 
