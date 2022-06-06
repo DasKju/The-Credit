@@ -4,9 +4,8 @@
  #include <stdlib.h>
  #include <stdio.h>
  #include <sstream>
- bool found = false;
- using std::stringstream;
-
+ bool found = false; using std::stringstream;
+//db.h
  using namespace std;
 int initialize(){
   sqlite3* pDb = NULL;
@@ -19,8 +18,7 @@ int initialize(){
            cout << "Failed to initialize library:" << ret;
            break;
        }
-       if (SQLITE_OK != (ret = sqlite3_open_v2("TheCredit.db", &pDb, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL)))
-        {
+       if (SQLITE_OK != (ret = sqlite3_open_v2("TheCredit.db", &pDb, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL))) {
             cout << "Failed to open conn:" << ret;
             break;
         }

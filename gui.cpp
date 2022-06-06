@@ -1,15 +1,13 @@
-
 #include <wx/wx.h>
 #include <wx/menu.h>
 #include <wx/textctrl.h>
-#include <wx/event.h>
 #include <iostream>
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
 #include "utils/command.h"
-#include "Logo.xpm"
-#include "utils/db-init.h"
+
+#include "utils/db-init.h" 
 
 class MyApp : public wxApp
 {
@@ -36,7 +34,6 @@ bool MyApp::OnInit()
 MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) : wxFrame(nullptr, wxID_ANY, title, pos, size)
 {
   dbinit();
-  SetIcon(wxICON(logo));
   wxMenuBar *menubar;
        wxMenu *file;
        wxMenu *help;
