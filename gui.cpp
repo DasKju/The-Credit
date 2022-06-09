@@ -46,6 +46,9 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
   menubar->Append(file, wxT("&Options"));
   menubar->Append(help, wxT("&Help"));
   SetMenuBar(menubar);
+  wxTextCtrl *Money = new wxTextCtrl(this, wxID_ANY, "1000$",wxPoint(5,260), wxSize(1030,45),wxTE_READONLY|wxALIGN_CENTRE_HORIZONTAL);
+  Money -> SetFont(Money->GetFont().Scale(1.75));
+  Money -> SetForegroundColour( wxColour("#03fc84") );
   wxTextCtrl    *test = new wxTextCtrl( this, wxID_ANY, "",
                             wxPoint(5,260), wxSize(1030,400),
                             wxTE_MULTILINE | wxTE_READONLY);
@@ -61,9 +64,16 @@ MyFrame::MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size) 
 
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
+    sizer -> Add(Money, 0.35, wxALL | wxEXPAND, 10 );      
     sizer -> Add(test, 1, wxALL | wxEXPAND, 10 );
     sizer -> Add( upperOnly, 0.25, wxALL | wxEXPAND, 10 );
      wxSizer *sizer_bottom = new wxBoxSizer(wxVERTICAL);
          this->SetSizerAndFit(sizer);
 
 }
+//
+// TODO: Gamemachanik  ¯\_(ツ)_/¯ 
+// TODO: Bots
+// TODO: Intigration of db
+// TODO: Working command system
+//
